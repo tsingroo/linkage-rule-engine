@@ -24,7 +24,6 @@ export function getMatchedRules(rules: Array<RuleItem>, values: Array<ValueItem>
         }
 
         return {
-            subjects: ruleItem.subjects,
             observer: ruleItem.observer,
             result: ruleItem[subjectVals],
         }
