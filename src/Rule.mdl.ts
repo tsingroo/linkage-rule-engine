@@ -28,7 +28,7 @@ export interface RuleItem {
   subjects: Array<string>;
   // 被影响控件的ID
   observer: string;
-  // subjectsJoin 规则: 值范围或值使用英文逗号拼接,如果【18-40,A】或者【1,3,5】或者【1,,5】
+  // subjectsJoin 规则: 值范围或值使用英文逗号拼接,如果【18->40,A】或者【1,3,5】或者【1,,5】
   [subjectsJoin: string]: DateRule | AgeRule | ArrayRule | Array<string> | Expr;
 }
 
