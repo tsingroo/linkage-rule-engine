@@ -61,6 +61,7 @@ function _getMergedValRange(ruleItem :RuleItem) {
        });
     });
 
+    return subRangeMap;
 }
 
 

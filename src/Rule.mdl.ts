@@ -14,7 +14,7 @@ export interface AgeRule {
 
 export interface ArrayRule {
   type: 'ARRAY';
-  options: Array<{ title: string; label: string; value: string; }>;
+  options: Array<{ val: string; text: string; }>;
 }
 
 export interface ValueItem {
