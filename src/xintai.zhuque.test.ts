@@ -74,7 +74,93 @@ const amountMax70W = [
   { val: '70000000', text: '70万' },
 ];
 
-const ruleItems: Array<RuleItem> = [{
+const amountRuleItems: Array<RuleItem> = [{
+  observer: 'amount',
+  subjects: ['age', 'area', 'duties.0'],
+  '0->17,,N': {
+    type: 'ARRAY',
+    options: amountMax50W
+  },
+  '0->17,,Y': {
+    type: 'ARRAY',
+    options: amountMax33W
+  },
+  '18->40,A,N': {
+    type: 'ARRAY',
+    options: amountMax70W
+  },
+  '18->40,A,Y': {
+    type: 'ARRAY',
+    options: amountMax46W
+  },
+  '18->40,B,N': {
+    type: 'ARRAY',
+    options: amountMax50W
+  },
+  '18->40,B,Y': {
+    type: 'ARRAY',
+    options: amountMax33W
+  },
+  '41->50,A,N': {
+    type: 'ARRAY',
+    options: amountMax50W
+  },
+  '41->50,A,Y': {
+    type: 'ARRAY',
+    options: amountMax33W
+  },
+  '41->50,B,N': {
+    type: 'ARRAY',
+    options: amountMax30W
+  },
+  '41->50,B,Y': {
+    type: 'ARRAY',
+    options: amountMax20W
+  }
+}];
+
+
+const payperiodMaxY5 = [
+  { val: 'SP', text: '一次性缴纳' },
+  { val: 'Y5', text: '5年交' }
+];
+const payperiodMaxY10 = [
+  { val: 'SP', text: '一次性缴纳' },
+  { val: 'Y5', text: '5年交' },
+  { val: 'Y10', text: '10年交' }
+];
+const payperiodMaxY15 = [
+  { val: 'SP', text: '一次性缴纳' },
+  { val: 'Y5', text: '5年交' },
+  { val: 'Y10', text: '10年交' },
+  { val: 'Y15', text: '15年交' }
+];
+const payperiodMaxY20 = [
+  { val: 'SP', text: '一次性缴纳' },
+  { val: 'Y5', text: '5年交' },
+  { val: 'Y10', text: '10年交' },
+  { val: 'Y15', text: '15年交' },
+  { val: 'Y20', text: '20年交' }
+];
+const payperiodMaxY25 = [
+  { val: 'SP', text: '一次性缴纳' },
+  { val: 'Y5', text: '5年交' },
+  { val: 'Y10', text: '10年交' },
+  { val: 'Y15', text: '15年交' },
+  { val: 'Y20', text: '20年交' },
+  { val: 'Y25', text: '25年交' }
+];
+const payperiodMaxY30 = [
+  { val: 'SP', text: '一次性缴纳' },
+  { val: 'Y5', text: '5年交' },
+  { val: 'Y10', text: '10年交' },
+  { val: 'Y15', text: '15年交' },
+  { val: 'Y20', text: '20年交' },
+  { val: 'Y25', text: '25年交' },
+  { val: 'Y30', text: '30年交' }
+];
+
+const payperiodRuleItems: Array<RuleItem> = [{
   observer: 'amount',
   subjects: ['age', 'area', 'duties.0'],
   '': {
