@@ -1,4 +1,5 @@
-import { RuleItem } from "./Rule.mdl";
+import { getMatchedRules } from ".";
+import { ArrayRule, RuleItem, RuleResultItem, ValueItem } from "./Rule.mdl";
 
 const amountMax6W = [
   { val: '5000000', text: '5万' },
@@ -77,6 +78,10 @@ const amountMax70W = [
 const amountRuleItems: Array<RuleItem> = [{
   observer: 'amount',
   subjects: ['age', 'area', 'duties.0'],
+  ',,': {
+    type: 'ARRAY',
+    options: amountMax70W
+  },
   '0->17,,N': {
     type: 'ARRAY',
     options: amountMax50W
@@ -135,6 +140,21 @@ const amountRuleItems: Array<RuleItem> = [{
   }
 }];
 
+test('信泰朱雀 联动', () => {
+  const valItems: Array<ValueItem> = [{
+    id: 'age',
+    value: ''
+  }, {
+    id: 'area',
+    value: ''
+  }, {
+    id: 'duties.0',
+    value: ''
+  }];
+
+  const matchedRules: Array<RuleResultItem> = getMatchedRules(amountRuleItems, valItems);
+  expect((matchedRules[0].result as ArrayRule).options.length).toBe(14);
+})
 
 const payPeriodMaxY5 = [
   { val: 'SP', text: '一次性缴纳' },
