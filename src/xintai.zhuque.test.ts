@@ -181,42 +181,42 @@ const payPeriodRuleItems: Array<RuleItem> = [{
   subjects: ['age', 'insPeriod'],
   '0->30,': {
     type: 'ARRAY',
-    options: []
+    options: payPeriodMaxY30
   },
   '31->35,A70': {
     type: 'ARRAY',
-    options: []
+    options: payPeriodMaxY20
   },
   '31->35,O': {
     type: 'ARRAY',
-    options: []
+    options: payPeriodMaxY30
   },
   '36->40,': {
     type: 'ARRAY',
-    options: []
+    options: payPeriodMaxY20
   },
   '41->45,A70': {
     type: 'ARRAY',
-    options: []
+    options: payPeriodMaxY15
   },
   '41->45,O': {
     type: 'ARRAY',
-    options: []
+    options: payPeriodMaxY20
   },
   '46->50,A70': {
     type: 'ARRAY',
-    options: []
+    options: payPeriodMaxY10
   },
   '46->50,O': {
     type: 'ARRAY',
-    options: []
+    options: payPeriodMaxY15
   },
   '50->55,A70': {
     type: 'ARRAY',
-    options: []
+    options: payPeriodMaxY5
   },
   '50->55,O': {
     type: 'ARRAY',
-    options: []
+    options: payPeriodMaxY10
   }
 }];
