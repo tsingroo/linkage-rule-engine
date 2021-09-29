@@ -116,33 +116,49 @@ const amountRuleItems: Array<RuleItem> = [{
   '41->50,B,Y': {
     type: 'ARRAY',
     options: amountMax20W
+  },
+  '51->55,A,N': {
+    type: 'ARRAY',
+    options: amountMax30W
+  },
+  '51->55,A,Y': {
+    type: 'ARRAY',
+    options: amountMax20W
+  },
+  '51->55,B,N': {
+    type: 'ARRAY',
+    options: amountMax10W
+  },
+  '51->55,B,Y': {
+    type: 'ARRAY',
+    options: amountMax6W
   }
 }];
 
 
-const payperiodMaxY5 = [
+const payPeriodMaxY5 = [
   { val: 'SP', text: '一次性缴纳' },
   { val: 'Y5', text: '5年交' }
 ];
-const payperiodMaxY10 = [
+const payPeriodMaxY10 = [
   { val: 'SP', text: '一次性缴纳' },
   { val: 'Y5', text: '5年交' },
   { val: 'Y10', text: '10年交' }
 ];
-const payperiodMaxY15 = [
+const payPeriodMaxY15 = [
   { val: 'SP', text: '一次性缴纳' },
   { val: 'Y5', text: '5年交' },
   { val: 'Y10', text: '10年交' },
   { val: 'Y15', text: '15年交' }
 ];
-const payperiodMaxY20 = [
+const payPeriodMaxY20 = [
   { val: 'SP', text: '一次性缴纳' },
   { val: 'Y5', text: '5年交' },
   { val: 'Y10', text: '10年交' },
   { val: 'Y15', text: '15年交' },
   { val: 'Y20', text: '20年交' }
 ];
-const payperiodMaxY25 = [
+const payPeriodMaxY25 = [
   { val: 'SP', text: '一次性缴纳' },
   { val: 'Y5', text: '5年交' },
   { val: 'Y10', text: '10年交' },
@@ -150,7 +166,7 @@ const payperiodMaxY25 = [
   { val: 'Y20', text: '20年交' },
   { val: 'Y25', text: '25年交' }
 ];
-const payperiodMaxY30 = [
+const payPeriodMaxY30 = [
   { val: 'SP', text: '一次性缴纳' },
   { val: 'Y5', text: '5年交' },
   { val: 'Y10', text: '10年交' },
@@ -160,14 +176,47 @@ const payperiodMaxY30 = [
   { val: 'Y30', text: '30年交' }
 ];
 
-const payperiodRuleItems: Array<RuleItem> = [{
-  observer: 'amount',
-  subjects: ['age', 'area', 'duties.0'],
-  '': {
+const payPeriodRuleItems: Array<RuleItem> = [{
+  observer: 'payPeriod',
+  subjects: ['age', 'insPeriod'],
+  '0->30,': {
     type: 'ARRAY',
-    options: [{ 
-      val: '',
-      text: '' 
-    }]
+    options: []
+  },
+  '31->35,A70': {
+    type: 'ARRAY',
+    options: []
+  },
+  '31->35,O': {
+    type: 'ARRAY',
+    options: []
+  },
+  '36->40,': {
+    type: 'ARRAY',
+    options: []
+  },
+  '41->45,A70': {
+    type: 'ARRAY',
+    options: []
+  },
+  '41->45,O': {
+    type: 'ARRAY',
+    options: []
+  },
+  '46->50,A70': {
+    type: 'ARRAY',
+    options: []
+  },
+  '46->50,O': {
+    type: 'ARRAY',
+    options: []
+  },
+  '50->55,A70': {
+    type: 'ARRAY',
+    options: []
+  },
+  '50->55,O': {
+    type: 'ARRAY',
+    options: []
   }
 }];
