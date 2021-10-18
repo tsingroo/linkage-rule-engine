@@ -1,4 +1,4 @@
-import { RuleItem, RuleResultItem, ValueItem } from "./Rule.mdl";
+import { RuleItem, RuleResultItem, ValueItem } from './Rule.mdl';
 
 /**
  * 根据页面需要筛选的控件的值和与之相关的规则，匹配出满足条件的控件的规则
@@ -7,24 +7,24 @@ import { RuleItem, RuleResultItem, ValueItem } from "./Rule.mdl";
  */
 export function getMatchedRules(rules: Array<RuleItem>, values: Array<ValueItem>): Array<RuleResultItem> {
     // 0.对于每一个规则都应该能匹配出一个唯一结果,对于undefined按空字符串处理
-    const ctrlNameValMapping = {};
+    const ctrlNameValMapping: any = {};
     values.forEach((valItem) => {
         ctrlNameValMapping[valItem.id] = valItem.value;
     });
     const rtRules:Array<RuleResultItem> = rules.map((ruleItem) => {
         const subjects = ruleItem.subjects;
-        
+
         const mergedValRange = _getMergedValRange(ruleItem);
-        const subjectVals = subjects.map((subjectId) => {
+        const subjectVals = subjects.map((subjectId: string) => {
             // 对于undefined处理成空字符串
-            return ctrlNameValMapping[subjectId] == undefined ? '': ctrlNameValMapping[subjectId];
+            return ctrlNameValMapping[subjectId] === undefined ? '': ctrlNameValMapping[subjectId];
         });
         const matchedValJoinKey = _getMatchedRange(mergedValRange, subjectVals);
 
         return {
             observer: ruleItem.observer,
-            result: ruleItem[matchedValJoinKey]
-        }
+            result: ruleItem[matchedValJoinKey]??ruleItem['default']
+        };
     });
 
     return rtRules;
@@ -32,7 +32,7 @@ export function getMatchedRules(rules: Array<RuleItem>, values: Array<ValueItem>
 
 /**
  * 获取归并后的值范围
- * @param ruleItem 
+ * @param ruleItem
  * @return 返回类型
  * subRangeMap = {
  *  sub0: {
@@ -51,21 +51,29 @@ function _getMergedValRange(ruleItem :RuleItem) {
     delete ruleImtemKeys['observer'];
     const valJoinKeys = Object.keys(ruleImtemKeys);
 
-    const subRangeMap = {};
+    const subRangeMap: any = {};
     valJoinKeys.forEach((valJoinItem) => {
-       const subValsArr = valJoinItem.split(',');
-       subValsArr.forEach((subValItem, subValIndex) => {
-           const subValMap = subRangeMap['sub' + subValIndex] ? subRangeMap['sub' + subValIndex]: {};
-           subValMap[subValItem] = 1;
-           subRangeMap['sub' + subValIndex] = subValMap;
-       });
+        const subValsArr = valJoinItem.split(',');
+        subValsArr.forEach((subValItem, subValIndex) => {
+            const subValMap = subRangeMap['sub' + subValIndex] ? subRangeMap['sub' + subValIndex]: {};
+            subValMap[subValItem] = 1;
+            subRangeMap['sub' + subValIndex] = subValMap;
+        });
     });
 
+    return subRangeMap;
 }
 
 
 function _getMatchedRange(valRange: any, vals: Array<string>) {
-    const matchedRange = [];
+    const matchedRange: Array<string> = [];
+
+    const valHasEmpty = vals.filter(item => item === '').length > 0;
+    if (valHasEmpty) {
+        const joinKeys = vals.map(() => '').join(',');
+        return joinKeys;
+    }
+
     vals.forEach((val, _i) => {
         const subI = valRange['sub' + _i];
         if(!subI) {
@@ -79,14 +87,14 @@ function _getMatchedRange(valRange: any, vals: Array<string>) {
                 }
                 return;
             }
-            // subValRangeItem 包含->，可能是0->18,也可能是2000/01/01->2021/01/01
-            // 两种情况都可以作为字符串通过ASCII序进行比较
+            // subValRangeItem 包含->，可能是0->18
             const itemArr = subValRangeItem.split('->');
-            if(itemArr[0] < val && itemArr[1] > val) {
+            if((+itemArr[0] <= +val) && (+itemArr[1] >= +val)) {
                 matchedRange.push(subValRangeItem);
             }
             return;
         });
     });
+
     return matchedRange.join(',');
 }
